@@ -1,0 +1,5 @@
+{
+  "name": "trx-nfd",
+  "compatibility_date": "2025-04-21",
+  "main": "worker.js"
+}
