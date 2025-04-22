@@ -6,7 +6,9 @@ const notificationUrl = 'https://raw.githubusercontent.com/luoguohao/trx-nfd/mai
 const startMsgUrl = 'https://raw.githubusercontent.com/luoguohao/trx-nfd/main/data/startMessage.md';
 const enable_notification = true
 
-let TOKEN, SECRET, ADMIN_UID
+const TOKEN = ENV_BOT_TOKEN;
+const SECRET = ENV_BOT_SECRET;
+const ADMIN_UID = ENV_ADMIN_UID;
 
 /**
  * Return url to telegram api, optionally with parameters added
@@ -50,10 +52,6 @@ function forwardMessage(msg){
  * Wait for requests to the worker
  */
 addEventListener('fetch', event => {
-  TOKEN = event.env.ENV_BOT_TOKEN
-  SECRET = event.env.ENV_BOT_SECRET // A-Z, a-z, 0-9, _ and -
-  ADMIN_UID = event.env.ENV_ADMIN_UID // your user id, get it from https://t.me/username_to_id_bot
-
   const url = new URL(event.request.url)
   if (url.pathname === WEBHOOK) {
     event.respondWith(handleWebhook(event))
