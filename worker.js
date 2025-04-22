@@ -1,14 +1,13 @@
-const TOKEN = ENV_BOT_TOKEN // Get it from @BotFather
 const WEBHOOK = '/endpoint'
-const SECRET = ENV_BOT_SECRET // A-Z, a-z, 0-9, _ and -
-const ADMIN_UID = ENV_ADMIN_UID // your user id, get it from https://t.me/username_to_id_bot
 
 const NOTIFY_INTERVAL = 3600 * 1000;
-const fraudDb = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/fraud.db';
-const notificationUrl = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/notification.txt'
-const startMsgUrl = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/startMessage.md';
-
+const fraudDb = 'https://raw.githubusercontent.com/luoguohao/trx-nfd/main/data/fraud.db';
+const notificationUrl = 'https://raw.githubusercontent.com/luoguohao/trx-nfd/main/data/notification.txt';
+const startMsgUrl = 'https://raw.githubusercontent.com/luoguohao/trx-nfd/main/data/startMessage.md';
 const enable_notification = true
+
+let TOKEN, SECRET, ADMIN_UID
+
 /**
  * Return url to telegram api, optionally with parameters added
  */
@@ -51,6 +50,10 @@ function forwardMessage(msg){
  * Wait for requests to the worker
  */
 addEventListener('fetch', event => {
+  TOKEN = event.env.ENV_BOT_TOKEN
+  SECRET = event.env.ENV_BOT_SECRET // A-Z, a-z, 0-9, _ and -
+  ADMIN_UID = event.env.ENV_ADMIN_UID // your user id, get it from https://t.me/username_to_id_bot
+
   const url = new URL(event.request.url)
   if (url.pathname === WEBHOOK) {
     event.respondWith(handleWebhook(event))
